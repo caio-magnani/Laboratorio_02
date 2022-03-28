@@ -1,9 +1,19 @@
 package com.lab2.alugueldeautomoveis.model;
 
 import javax.management.InvalidAttributeValueException;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public abstract class User {
+@Entity
+@Table(name = "tb_user")
+public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String email;
     private String password;
@@ -12,6 +22,10 @@ public abstract class User {
         setName(name);
         setEmail(email);
         setPassword(password);
+    }
+    
+    public Long getId() {
+    	return this.id;
     }
 
     public String getName() {

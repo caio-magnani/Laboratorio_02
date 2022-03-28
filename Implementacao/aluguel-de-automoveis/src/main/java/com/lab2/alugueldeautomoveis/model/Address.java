@@ -21,10 +21,6 @@ public class Address {
     private Integer number;
     private String complement;
 
-    @OneToOne
-    @JoinColumn(name = "client_id")
-    private ClientUser client;
-
     public Address(String cep, String street, String state, String city, Integer number, String complement) {
         setCep(cep);
         setStreet(street);
