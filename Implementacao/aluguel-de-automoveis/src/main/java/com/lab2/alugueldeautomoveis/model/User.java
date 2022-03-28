@@ -41,10 +41,10 @@ public class User {
     }
 
     public void setEmail(String email) throws InvalidAttributeValueException {
-        if(!email.contains("@"))
-            throw new InvalidAttributeValueException("O email deve conter @");
-        if(!email.contains(".com"))
-            throw new InvalidAttributeValueException("O email deve conter .com");
+       // if(!email.contains("@"))
+            //throw new InvalidAttributeValueException("O email deve conter @");
+       // if(!email.contains(".com"))
+           // throw new InvalidAttributeValueException("O email deve conter .com");
         this.email = email;
     }
 
@@ -53,8 +53,8 @@ public class User {
     }
 
     public void setPassword(String password) throws InvalidAttributeValueException {
-        if(!(password.length() > 8))
-            throw new InvalidAttributeValueException("A senha deve ter 8 caracteres");
+        //if(!(password.length() > 8))
+            //throw new InvalidAttributeValueException("A senha deve ter 8 caracteres");
         this.password = password;
     }
     

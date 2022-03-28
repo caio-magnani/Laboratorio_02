@@ -16,7 +16,7 @@ public class Address {
     private String street;
     private String state;
     private String city;
-    private Integer number;
+    private int number;
     private String complement;
 
     public Address(String cep, String street, String state, String city, Integer number, String complement) {
