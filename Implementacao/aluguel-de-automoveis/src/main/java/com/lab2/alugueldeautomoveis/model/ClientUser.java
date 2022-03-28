@@ -2,7 +2,6 @@ package com.lab2.alugueldeautomoveis.model;
 
 
 import java.util.List;
-import com.lab2.alugueldeautomoveis.model.User;
 
 import javax.management.InvalidAttributeValueException;
 import javax.persistence.Entity;
