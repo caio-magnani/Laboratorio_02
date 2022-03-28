@@ -72,4 +72,5 @@ public class ClientUserController {
 		saveOcupations(clientUser.getOcupations());
 		clientUserRepository.save(clientUser);
 	}
+	
 }

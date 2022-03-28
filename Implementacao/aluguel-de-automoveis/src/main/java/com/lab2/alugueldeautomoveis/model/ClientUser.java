@@ -41,6 +41,10 @@ public class ClientUser {
         setCpf(cpf);
         setRg(rg);     
     }
+    
+    public ClientUser() {
+    	
+    }
 
 
     public Long getId() {

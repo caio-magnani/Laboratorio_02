@@ -27,6 +27,10 @@ public class Address {
         setNumber(number);
         setComplement(complement);
     }
+    
+    public Address() {
+    	
+    }
 
     public Long getId() {
         return this.id;
