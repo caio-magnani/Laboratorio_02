@@ -57,7 +57,7 @@ public class User {
     }
 
     public void setPassword(String password) throws InvalidAttributeValueException {
-        if(!(password.length() > 8))
+        if(!(password.length() >= 8))
             throw new InvalidAttributeValueException("A senha deve ter 8 caracteres");
         this.password = password;
     }
