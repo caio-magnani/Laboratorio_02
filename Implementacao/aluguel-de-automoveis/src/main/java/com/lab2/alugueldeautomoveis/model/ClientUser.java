@@ -27,14 +27,14 @@ public class ClientUser {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-
+    /*
     @OneToMany
     @JoinColumn(name = "client_ocupation_id")
     private List<Ocupation> ocupations;
 
     @OneToOne
     @JoinColumn(name = "address_id")
-    private Address address;
+    private Address address;*/
 
     public ClientUser(String name, String email, String password, String cpf, String rgString) throws InvalidAttributeValueException {
         user = new User(name, email, password);
@@ -45,6 +45,14 @@ public class ClientUser {
 
     public Long getId() {
         return this.id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getCpf() {
@@ -62,13 +70,13 @@ public class ClientUser {
     public void setRg(String rg) {
         this.rg = rg;
     }
-
+    /*
     public List<Ocupation> getOcupations() {
         return this.ocupations;
     }
 
     public Address getAddress() {
         return this.address;
-    }
+    }*/
 
 }
