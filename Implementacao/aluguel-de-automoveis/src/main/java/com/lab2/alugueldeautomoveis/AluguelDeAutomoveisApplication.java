@@ -1,13 +1,13 @@
-package com.puc.laboratorio2;
+package com.lab2.alugueldeautomoveis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Laboratorio2Application {
+public class AluguelDeAutomoveisApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Laboratorio2Application.class, args);
+		SpringApplication.run(AluguelDeAutomoveisApplication.class, args);
 	}
 
 }
