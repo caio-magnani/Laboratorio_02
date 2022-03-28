@@ -3,7 +3,13 @@ package com.lab2.alugueldeautomoveis.controller;
 import java.util.List;
 
 import com.lab2.alugueldeautomoveis.model.ClientUser;
+import com.lab2.alugueldeautomoveis.model.Ocupation;
+import com.lab2.alugueldeautomoveis.model.Address;
+import com.lab2.alugueldeautomoveis.model.User;
+import com.lab2.alugueldeautomoveis.repository.AddressRepository;
 import com.lab2.alugueldeautomoveis.repository.ClientUserRepository;
+import com.lab2.alugueldeautomoveis.repository.OcupationRepository;
+import com.lab2.alugueldeautomoveis.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,20 +25,51 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClientUserController {
 
 	@Autowired
-	private ClientUserRepository repository;
+	private ClientUserRepository clientUserRepository;
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private AddressRepository addressRepository;
+
+	@Autowired
+	private OcupationRepository ocupationRepository;
 	
 	@GetMapping
 	public List<ClientUser> getAll() {
-		return repository.findAll();
+		return clientUserRepository.findAll();
 	}
 
 	@GetMapping(value = "/{id}")
 	public ClientUser get(@PathVariable Long id) {
-		return repository.getById(id);
+		return clientUserRepository.getById(id);
 	}
 	
 	@PostMapping
 	public ClientUser insert(@RequestBody ClientUser client) {
-		return repository.save(client);
+		saveClientUser(client);
+		return client;
+	}
+
+	private void saveUser(User user){
+		userRepository.save(user);
+	}
+
+	private void saveOcupations(List<Ocupation> ocupations){
+		for (Ocupation ocupation : ocupations) {
+			ocupationRepository.save(ocupation);
+		}
+	}
+
+	private void saveAddress(Address address){
+		addressRepository.save(address);
+	}
+
+	private void saveClientUser(ClientUser clientUser){
+		saveUser(clientUser.getUser());
+		saveAddress(clientUser.getAddress());
+		saveOcupations(clientUser.getOcupations());
+		clientUserRepository.save(clientUser);
 	}
 }
