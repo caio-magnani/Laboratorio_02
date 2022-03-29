@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.thymeleaf.exceptions.AlreadyInitializedException;
 
 
 @RestController
@@ -43,11 +44,13 @@ public class ClientUserController {
 
 	@GetMapping(value = "/{id}")
 	public ClientUser get(@PathVariable Long id) {
-		return clientUserRepository.getById(id);
+		return clientUserRepository.findById(id).get();
 	}
 	
 	@PostMapping
 	public ClientUser insert(@RequestBody ClientUser client) {
+		if (getAll().contains(client))
+			throw new AlreadyInitializedException("Ja existe esta conta no sistema");
 		saveClientUser(client);
 		return client;
 	}
