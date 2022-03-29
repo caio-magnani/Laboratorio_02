@@ -82,4 +82,11 @@ public class ClientUser {
         return this.address;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        ClientUser clientUserObject = (ClientUser) object;
+        return this.getCpf().equals(clientUserObject.getCpf()) || this.getRg().equals(clientUserObject.getRg()) || this.getUser().getEmail().equals(clientUserObject.getUser().getEmail());
+        
+    }
+
 }
