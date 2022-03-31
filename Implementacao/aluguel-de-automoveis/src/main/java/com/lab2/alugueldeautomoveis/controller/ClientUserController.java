@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.lab2.alugueldeautomoveis.model.ClientUser;
 import com.lab2.alugueldeautomoveis.model.Ocupation;
+import com.lab2.alugueldeautomoveis.controller.util.exception.InvalidLoginException;
 import com.lab2.alugueldeautomoveis.model.Address;
 import com.lab2.alugueldeautomoveis.model.User;
-import com.lab2.alugueldeautomoveis.model.exceptions.InvalidLoginException;
 import com.lab2.alugueldeautomoveis.repository.AddressRepository;
 import com.lab2.alugueldeautomoveis.repository.ClientUserRepository;
 import com.lab2.alugueldeautomoveis.repository.OcupationRepository;
