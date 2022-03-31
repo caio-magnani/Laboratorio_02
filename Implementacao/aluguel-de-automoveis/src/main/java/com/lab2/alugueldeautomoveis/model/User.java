@@ -1,6 +1,5 @@
 package com.lab2.alugueldeautomoveis.model;
 
-import javax.management.InvalidAttributeValueException;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +17,7 @@ public class User {
     private String email;
     private String password;
 
-    public User(String name,String email, String password) throws InvalidAttributeValueException {
+    public User(String name,String email, String password){
         setName(name);
         setEmail(email);
         setPassword(password);
@@ -44,11 +43,7 @@ public class User {
         return email;
     }
 
-    public void setEmail(String email) throws InvalidAttributeValueException {
-        if(!email.contains("@"))
-            throw new InvalidAttributeValueException("O email deve conter @");
-        if(!email.contains(".com"))
-            throw new InvalidAttributeValueException("O email deve conter .com");
+    public void setEmail(String email){
         this.email = email;
     }
 
@@ -56,13 +51,16 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) throws InvalidAttributeValueException {
-        if(!(password.length() >= 8))
-            throw new InvalidAttributeValueException("A senha deve ter 8 caracteres");
+    public void setPassword(String password){
         this.password = password;
     }
     
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", name=" + name + ", email=" + email +  ", password=" + password + "]";
+    }
+
     public boolean login(String email, String password) {   	
-    	return (email == this.email && this.password == password)?true:false;
+    	return (this.email == email && this.password == password);
     }
 }

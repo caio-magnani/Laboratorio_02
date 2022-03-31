@@ -3,7 +3,6 @@ package com.lab2.alugueldeautomoveis.model;
 
 import java.util.List;
 
-import javax.management.InvalidAttributeValueException;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,7 +35,7 @@ public class ClientUser {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    public ClientUser(String name, String email, String password, String cpf, String rgString) throws InvalidAttributeValueException {
+    public ClientUser(String name, String email, String password, String cpf, String rgString){
         user = new User(name, email, password);
         setCpf(cpf);
         setRg(rg);     
