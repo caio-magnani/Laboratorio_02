@@ -2,8 +2,11 @@ package com.lab2.alugueldeautomoveis.controller;
 
 import java.util.List;
 
+import javax.management.InvalidAttributeValueException;
+
 import com.lab2.alugueldeautomoveis.model.ClientUser;
 import com.lab2.alugueldeautomoveis.model.Ocupation;
+import com.lab2.alugueldeautomoveis.controller.util.dto.LoginUserRequest;
 import com.lab2.alugueldeautomoveis.controller.util.exception.InvalidLoginException;
 import com.lab2.alugueldeautomoveis.model.Address;
 import com.lab2.alugueldeautomoveis.model.User;
@@ -15,7 +18,6 @@ import com.lab2.alugueldeautomoveis.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,16 +39,6 @@ public class ClientUserController {
 
 	@Autowired
 	private OcupationRepository ocupationRepository;
-	
-	@GetMapping()
-	public List<ClientUser> getAll() {
-		return clientUserRepository.findAll();
-	}
-
-	@GetMapping(value = "/{id}")
-	public ClientUser get(@PathVariable Long id) {
-		return clientUserRepository.findById(id).get();
-	}
 
 	@GetMapping(value = "/login")
 	public String loginPage(){
@@ -54,10 +46,15 @@ public class ClientUserController {
 	}
 	
 	@PostMapping(value = "/login")
-	public String login(User user) throws InvalidLoginException{
+	public String login(LoginUserRequest userRequest) throws InvalidLoginException, InvalidAttributeValueException{
+		System.out.println("Email = " + userRequest.getEmail());
+		System.out.println("Password = " + userRequest.getPassword());
+
+		System.out.println("toUser Email = " + userRequest.getEmail());
+		System.out.println("toUser Password = " + userRequest.getPassword());
 		try{
-			if(!this.successLogin(user))
-				throw new InvalidLoginException("Este login é invalido! \n Verifique se seu email ou senha estâo corretos.");
+			if(!this.successLogin(userRequest.toUser()))
+				throw new InvalidLoginException("Este login é invalido! \n Verifique se seu email ou senha estão corretos.");
 		}catch(NullPointerException e){
 			throw new InvalidLoginException("Esta conta não foi cadastrada ainda.");
 		}
@@ -76,13 +73,23 @@ public class ClientUserController {
 		saveClientUser(client);
 		return client;
 	}
+	public List<ClientUser> getAll() {
+		return clientUserRepository.findAll();
+	}
+	
+	public ClientUser get(Long id) {
+		return clientUserRepository.findById(id).get();
+	}
 	
 	public ClientUser getByEmail(String email){
 		return clientUserRepository.findAll().stream().filter(c -> c.getUser().getEmail().equals(email)).findFirst().get();
 	}
 
 	public boolean successLogin(User user){
-		return (this.getByEmail(user.getEmail()).getUser().login(user.getEmail(),user.getPassword()))?true:false;
+		User thisUser = this.getByEmail(user.getEmail()).getUser();
+		if(thisUser.getPassword() == null)
+			throw new NullPointerException();
+		return thisUser.login(user.getEmail(),user.getPassword()) ;
 	}
 
 	private void saveUser(User user){
