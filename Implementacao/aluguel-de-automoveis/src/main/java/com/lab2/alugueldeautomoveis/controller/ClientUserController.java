@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.thymeleaf.exceptions.AlreadyInitializedException;
 
 
 @Controller
@@ -47,17 +46,7 @@ public class ClientUserController {
 	
 	@PostMapping(value = "/login")
 	public String login(LoginUserRequest userRequest) throws InvalidLoginException, InvalidAttributeValueException{
-		System.out.println("Email = " + userRequest.getEmail());
-		System.out.println("Password = " + userRequest.getPassword());
-
-		System.out.println("toUser Email = " + userRequest.getEmail());
-		System.out.println("toUser Password = " + userRequest.getPassword());
-		try{
-			if(!this.successLogin(userRequest.toUser()))
-				throw new InvalidLoginException("Este login é invalido! \n Verifique se seu email ou senha estão corretos.");
-		}catch(NullPointerException e){
-			throw new InvalidLoginException("Esta conta não foi cadastrada ainda.");
-		}
+		
 		return "client";
 	}
 
@@ -68,8 +57,6 @@ public class ClientUserController {
 	
 	@PostMapping(value = "/cadastro")
 	public ClientUser insert(@RequestBody ClientUser client) {
-		if (getAll().contains(client))
-			throw new AlreadyInitializedException("Ja existe esta conta no sistema");
 		saveClientUser(client);
 		return client;
 	}

@@ -22,6 +22,7 @@ public class User {
     private String name;
 
     @NotNull
+    @Min(5)
     private String email;
 
     @NotNull
