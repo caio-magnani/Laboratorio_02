@@ -1,22 +1,19 @@
 <header th:fragment="client" class="navbar navbar-dark bg-dark shadow-sm">
     <th:block></th:block>
     <a th:replace="~{header :: logo}"></a>
-    <nav>
-        <a th:href="@{/pedidos}" class="btn btn-primary my-2">Pedidos</a>
-    </nav>
+    <a th:href="@{/pedidos}" class="btn btn-primary my-2">Pedidos</a>
+    <a th:href="@{/}" class="btn btn-primary my-2">logout</a>
 </header>
 
 <header th:fragment="enterprise" class="navbar navbar-dark bg-dark shadow-sm">
     <a th:replace="~{header :: logo}"></a>
-    <nav>
-        <a th:href="@{/tickets}" class="btn btn-primary my-2">Tickets</a>
-        <a th:href="@{/}" class="btn btn-primary my-2">logout</a>
-    </nav>
+    <a th:href="@{/tickets}" class="btn btn-primary my-2">Tickets</a>
+    <a th:href="@{/}" class="btn btn-primary my-2">logout</a>
 </header>
 
 <header th:fragment="login" class="navbar navbar-dark bg-dark shadow-sm">
     <a th:replace="~{header :: logo}"></a>
-    <a th:href="@{/login}" class="btn btn-primary my-2 btn-login">Login</a>
+    <a th:href="@{/client/login}" class="btn btn-primary my-2 btn-login">Login</a>
 </header>
 
 <a th:fragment="logo" th:href="@{/}" class="navbar-brand d-flex align-items-center">
