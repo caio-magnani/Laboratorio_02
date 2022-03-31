@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.exceptions.AlreadyInitializedException;
 
 
-@Controller
+@RestController
+@RequestMapping("client")
 public class ClientUserController {
 
 	@Autowired
@@ -35,27 +38,22 @@ public class ClientUserController {
 	@Autowired
 	private OcupationRepository ocupationRepository;
 	
-	@GetMapping(value = "client")
+	@GetMapping()
 	public List<ClientUser> getAll() {
 		return clientUserRepository.findAll();
 	}
 
-	@GetMapping(value = "client/{id}")
+	@GetMapping(value = "/{id}")
 	public ClientUser get(@PathVariable Long id) {
 		return clientUserRepository.findById(id).get();
 	}
 
-	@GetMapping(value = "client/login")
+	@GetMapping(value = "/login")
 	public String loginPage(){
 		return "login-client";
 	}
-
-	@GetMapping(value = "client/cadastro")
-	public String cadastroPage(){
-		return "cadastro-client";
-	}
-
-	@PostMapping(value = "client/login")
+	
+	@PostMapping(value = "/login")
 	public String login(User user) throws InvalidLoginException{
 		try{
 			if(!this.successLogin(user))
@@ -65,8 +63,13 @@ public class ClientUserController {
 		}
 		return "client";
 	}
+
+	@GetMapping(value = "/cadastro")
+	public String cadastroPage(){
+		return "cadastro-client";
+	}
 	
-	@PostMapping(value = "client/cadastro")
+	@PostMapping(value = "/cadastro")
 	public ClientUser insert(@RequestBody ClientUser client) {
 		if (getAll().contains(client))
 			throw new AlreadyInitializedException("Ja existe esta conta no sistema");
