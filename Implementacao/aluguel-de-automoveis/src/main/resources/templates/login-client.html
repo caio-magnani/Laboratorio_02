@@ -3,8 +3,20 @@
 <head th:replace="~{head :: head('index','Login')}"></head>
 <body class="d-flex flex-column">
     <header th:replace="~{header :: login}" ></header>
-    <main>
-        
+    <main class="d-flex flex-column align-items-center text-center bg-light">
+        <form class="form-signin" th:action="@{/client/login}" method="post">
+            <img class="mb-4" th:src="@{/img/logo.png}" alt="logo" width="100px" height="100px">
+            <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+
+            <label class="sr-only" for="email">Email</label>
+            <input class="form-control" id="email" type="email" name="email" placeholder="email@exemplo.com">
+
+            <label class="sr-only" for="password">Senha</label>
+            <input class="form-control" id="password" type="password" name="password" placeholder="********">
+
+            <button class="btn btn-lg btn-primary btn-block btn-login" type="submit">Login</button>
+        </form>
+        <a class="btn btn-primary my-2" th:href="@{/client/cadastro}">Não tem conta? Crie sua conta aqui!</a>
     </main>
     <th:block th:replace="~{footer :: footer}"></th:block>
 </body>

@@ -13,3 +13,7 @@
     color: black;
     border-color: black;
 }
+
+.form-signin{
+    width: 400px;
+}
