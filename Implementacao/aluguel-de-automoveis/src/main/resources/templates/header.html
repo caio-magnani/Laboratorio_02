@@ -1,0 +1,25 @@
+<header th:fragment="client" class="navbar navbar-dark bg-dark shadow-sm">
+    <th:block></th:block>
+    <a th:replace="~{header :: logo}"></a>
+    <nav>
+        <a th:href="@{/pedidos}" class="btn btn-primary my-2">Pedidos</a>
+    </nav>
+</header>
+
+<header th:fragment="enterprise" class="navbar navbar-dark bg-dark shadow-sm">
+    <a th:replace="~{header :: logo}"></a>
+    <nav>
+        <a th:href="@{/tickets}" class="btn btn-primary my-2">Tickets</a>
+        <a th:href="@{/}" class="btn btn-primary my-2">logout</a>
+    </nav>
+</header>
+
+<header th:fragment="login" class="navbar navbar-dark bg-dark shadow-sm">
+    <a th:replace="~{header :: logo}"></a>
+    <a th:href="@{/login}" class="actbtn btn-primary my-2 btn-login">Login</a>
+</header>
+
+<a th:fragment="logo" th:href="@{/}" class="navbar-brand d-flex align-items-center">
+    <img th:src="@{/img/logo.png}" alt="imagem logo" class="mr-2" style="height: 70px; width: 70px;">
+    <strong>AutoAluga</strong>
+</a>

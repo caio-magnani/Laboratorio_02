@@ -1,3 +1,15 @@
-h1{
-    color: blue;
+.btn-primary:hover{
+    background-color: white;
+    color: #0069D9;
+    border-color: #0069D9;
+}
+.btn-login{
+    background-color: black;
+    color: white;
+    border-color: black;
+}
+.btn-login:hover{
+    background-color: white;
+    color: black;
+    border-color: black;
 }

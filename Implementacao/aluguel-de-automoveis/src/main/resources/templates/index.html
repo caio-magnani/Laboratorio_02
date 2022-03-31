@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<link rel="stylesheet" href="../static/css/index.css" th:href="@{css/index.css}">-->
-    <title>Aluguel de Automoveis</title>
-</head>
-<body>
-    <header></header>
-    <main>
-        <form action="login" method="post">
-            <label for="email">email :</label>
-            <input type="email" name="email" id=""> <br>
-            <label for="password">password :</label>
-            <input type="password" name="password" id=""><br>
-            <button type="submit">logar</button>
-        </form>
-        <a href="/criar-conta"></a>
+<head th:replace="~{head :: head('index','Home')}"></head>
+<body class="d-flex flex-column">
+    <header th:replace="~{header :: login}" ></header>
+    <main class="jumbotron text-center bg-light">
+        <h1>Faça aqui seu aluguel agora!</h1>
+        <p class="lead">
+            Para fazer seu primeiro aluguel <a th:href="@{/client/cadastro}">faça seu cadastro aqui</a>. 
+            <br>
+            Caso ja tenha conta, <a th:href="@{/client/login}">faça seu login aqui</a>.
+        </p>
+        <br>
+        <a th:href="@{/client/cadastro}" class="btn btn-primary my-2">Cadastro</a>
+        <a th:href="@{/client/login}" class="btn btn-primary btn-login my-2">Login</a>
     </main>
-    <footer></footer>
+    <hr>
+    <th:block th:replace="~{footer :: footer}"></th:block>
 </body>
 </html>
