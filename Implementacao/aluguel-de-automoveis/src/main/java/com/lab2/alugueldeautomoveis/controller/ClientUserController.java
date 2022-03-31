@@ -23,7 +23,7 @@ import org.thymeleaf.exceptions.AlreadyInitializedException;
 
 
 @RestController
-@RequestMapping("client")
+@RequestMapping("/client")
 public class ClientUserController {
 
 	@Autowired
