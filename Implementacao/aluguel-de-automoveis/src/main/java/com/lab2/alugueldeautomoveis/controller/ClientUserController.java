@@ -6,6 +6,7 @@ import com.lab2.alugueldeautomoveis.model.ClientUser;
 import com.lab2.alugueldeautomoveis.model.Ocupation;
 import com.lab2.alugueldeautomoveis.model.Address;
 import com.lab2.alugueldeautomoveis.model.User;
+import com.lab2.alugueldeautomoveis.model.exceptions.InvalidLoginException;
 import com.lab2.alugueldeautomoveis.repository.AddressRepository;
 import com.lab2.alugueldeautomoveis.repository.ClientUserRepository;
 import com.lab2.alugueldeautomoveis.repository.OcupationRepository;
@@ -16,13 +17,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.exceptions.AlreadyInitializedException;
 
 
-@RestController
-@RequestMapping(value = "/clients")
+@Controller
 public class ClientUserController {
 
 	@Autowired
@@ -37,22 +35,51 @@ public class ClientUserController {
 	@Autowired
 	private OcupationRepository ocupationRepository;
 	
-	@GetMapping
+	@GetMapping(value = "client")
 	public List<ClientUser> getAll() {
 		return clientUserRepository.findAll();
 	}
 
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "client/{id}")
 	public ClientUser get(@PathVariable Long id) {
 		return clientUserRepository.findById(id).get();
 	}
+
+	@GetMapping(value = "client/login")
+	public String loginPage(){
+		return "login-client";
+	}
+
+	@GetMapping(value = "client/cadastro")
+	public String cadastroPage(){
+		return "cadastro-client";
+	}
+
+	@PostMapping(value = "client/login")
+	public String login(User user) throws InvalidLoginException{
+		try{
+			if(!this.successLogin(user))
+				throw new InvalidLoginException("Este login é invalido! \n Verifique se seu email ou senha estâo corretos.");
+		}catch(NullPointerException e){
+			throw new InvalidLoginException("Esta conta não foi cadastrada ainda.");
+		}
+		return "client";
+	}
 	
-	@PostMapping
+	@PostMapping(value = "client/cadastro")
 	public ClientUser insert(@RequestBody ClientUser client) {
 		if (getAll().contains(client))
 			throw new AlreadyInitializedException("Ja existe esta conta no sistema");
 		saveClientUser(client);
 		return client;
+	}
+	
+	public ClientUser getByEmail(String email){
+		return clientUserRepository.findAll().stream().filter(c -> c.getUser().getEmail().equals(email)).findFirst().get();
+	}
+
+	public boolean successLogin(User user){
+		return (this.getByEmail(user.getEmail()).getUser().login(user.getEmail(),user.getPassword()))?true:false;
 	}
 
 	private void saveUser(User user){
