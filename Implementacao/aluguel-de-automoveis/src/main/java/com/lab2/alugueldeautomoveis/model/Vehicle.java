@@ -1,11 +1,20 @@
 package com.lab2.alugueldeautomoveis.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Vehicle {
-	private long id;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	private String brand;
 	private String model;
 	private int year;
-	private double dailyValue;
+	private float dailyValue;
 	private String owner;
 	
 	public String getBrand() {
@@ -32,11 +41,11 @@ public class Vehicle {
 		this.year = year;
 	}
 
-	public double getDailyValue() {
+	public float getDailyValue() {
 		return dailyValue;
 	}
 
-	public void setDailyValue(double dailyValue) {
+	public void setDailyValue(float dailyValue) {
 		this.dailyValue = dailyValue;
 	}
 
@@ -52,7 +61,7 @@ public class Vehicle {
 		
 	}
 	
-	public Vehicle(String brand, String model, int year, double dailyValue, String owner) {
+	public Vehicle(String brand, String model, int year, float dailyValue, String owner) {
 		super();
 		setBrand(brand);
 		setModel(model);
