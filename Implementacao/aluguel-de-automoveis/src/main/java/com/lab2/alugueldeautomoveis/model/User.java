@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_user")
@@ -13,8 +16,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Min(3)
     private String name;
+
+    @NotNull
     private String email;
+
+    @NotNull
+    @Min(8)
     private String password;
 
     public User(String name,String email, String password){
@@ -60,6 +71,7 @@ public class User {
         return "User [id=" + id + ", name=" + name + ", email=" + email +  ", password=" + password + "]";
     }
 
+    @AssertTrue
     public boolean login(String email, String password) {   	
     	return (this.email == email && this.password == password);
     }
