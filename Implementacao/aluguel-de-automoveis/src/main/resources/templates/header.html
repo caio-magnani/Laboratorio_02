@@ -13,6 +13,10 @@
 
 <header th:fragment="login" class="navbar navbar-dark bg-dark shadow-sm">
     <a th:replace="~{header :: logo}"></a>
+</header>
+
+<header th:fragment="index" class="navbar navbar-dark bg-dark shadow-sm">
+    <a th:replace="~{header :: logo}"></a>
     <a th:href="@{/client/login}" class="btn btn-primary my-2 btn-login">Login</a>
 </header>
 

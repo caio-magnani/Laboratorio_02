@@ -2,12 +2,9 @@ package com.lab2.alugueldeautomoveis.controller;
 
 import java.util.List;
 
-import javax.management.InvalidAttributeValueException;
-
 import com.lab2.alugueldeautomoveis.model.ClientUser;
 import com.lab2.alugueldeautomoveis.model.Ocupation;
 import com.lab2.alugueldeautomoveis.controller.util.dto.LoginUserRequest;
-import com.lab2.alugueldeautomoveis.controller.util.exception.InvalidLoginException;
 import com.lab2.alugueldeautomoveis.model.Address;
 import com.lab2.alugueldeautomoveis.model.User;
 import com.lab2.alugueldeautomoveis.repository.AddressRepository;
@@ -17,6 +14,7 @@ import com.lab2.alugueldeautomoveis.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,19 +38,34 @@ public class ClientUserController {
 	private OcupationRepository ocupationRepository;
 
 	@GetMapping(value = "/login")
-	public String loginPage(){
-		return "login-client";
+	public String loginPage(LoginUserRequest userRequest){
+		return "client/login";
 	}
 	
 	@PostMapping(value = "/login")
-	public String login(LoginUserRequest userRequest) throws InvalidLoginException, InvalidAttributeValueException{
-		
-		return "client";
+	public String login(LoginUserRequest request, BindingResult result){
+		System.out.println("ENTROU AQUI CARALHO! "+request.getEmail()+"  "+request.getPassword());
+		User user = new User();
+		try{
+			user = this.getByEmail(request.getEmail()).getUser();
+		}catch(Exception e){
+			user=new User(null,null,null);
+		}
+		System.out.println("Do banco temos "+ user.getEmail()+" "+user.getPassword());
+		System.out.println("temos erros? "+ result.hasErrors());
+		System.out.println("Login invalido ? "+ !user.login(request.getEmail(), request.getPassword()));
+		if(result.hasErrors())
+			return "client/login";
+		if(!user.login(request.getEmail(), request.getPassword())){
+			request.setExist(false);
+			return "client/login";
+		}
+		return "client/home";
 	}
 
 	@GetMapping(value = "/cadastro")
 	public String cadastroPage(){
-		return "cadastro-client";
+		return "client/cadastro";
 	}
 	
 	@PostMapping(value = "/cadastro")
@@ -70,13 +83,6 @@ public class ClientUserController {
 	
 	public ClientUser getByEmail(String email){
 		return clientUserRepository.findAll().stream().filter(c -> c.getUser().getEmail().equals(email)).findFirst().get();
-	}
-
-	public boolean successLogin(User user){
-		User thisUser = this.getByEmail(user.getEmail()).getUser();
-		if(thisUser.getPassword() == null)
-			throw new NullPointerException();
-		return thisUser.login(user.getEmail(),user.getPassword()) ;
 	}
 
 	private void saveUser(User user){
