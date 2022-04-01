@@ -7,23 +7,64 @@ import com.lab2.alugueldeautomoveis.model.ClientUser;
 import com.lab2.alugueldeautomoveis.model.Ocupation;
 import com.lab2.alugueldeautomoveis.model.User;
 
-public interface ClientUserRequestInterface {
+class ClientUserRequestInterface {
+	
+	private String name;
+	private String email;
+	private String password;
+	private String rg;
+	private String cpf;
+	private List<Ocupation> ocupations;
+	private Address address;
+	
+	
 
-    public User getUser();
+    public String getName() {
+		return name;
+	}
 
-    public void setUser(User user);
+	public String getEmail() {
+		return email;
+	}
 
-    public String getCpf();
+	public String getPassword() {
+		return password;
+	}
 
-    public void setCpf(String cpf);
+	public List<Ocupation> getOcupations() {
+		return ocupations;
+	}
 
-    public String getRg();
+	public String getCpf() {
+    	return this.cpf;
+    }
 
-    public void setRg(String rg);
+    public String getRg() {
+    	return this.rg;
+    }
 
-    public List<Ocupation> getOcupations();
+ //   public List<Ocupation> getOcupations(){
+//    	return this.ocupations;
+ //   }
 
-    public Address getAddress();
+//    public Address getAddress() {
+//    	return this.address;
+//    }
+    
+    
 
-    public ClientUser toClientUser();
+    public ClientUserRequestInterface(String name, String email, String password, String rg, String cpf) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.rg = rg;
+		this.cpf = cpf;
+		this.ocupations = ocupations;
+		this.address = address;
+	}
+
+	public ClientUser toClientUser() {
+		return new ClientUser(name, email, password, cpf, rg);
+	}
 }

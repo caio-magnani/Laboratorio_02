@@ -69,9 +69,9 @@ public class ClientUserController {
 	}
 	
 	@PostMapping(value = "/cadastro")
-	public ClientUser insert(@RequestBody ClientUser client) {
+	public String insert(ClientUser client) {
 		saveClientUser(client);
-		return client;
+		return "client/login";
 	}
 	public List<ClientUser> getAll() {
 		return clientUserRepository.findAll();
@@ -101,8 +101,8 @@ public class ClientUserController {
 
 	private void saveClientUser(ClientUser clientUser){
 		saveUser(clientUser.getUser());
-		saveAddress(clientUser.getAddress());
-		saveOcupations(clientUser.getOcupations());
+		//saveAddress(clientUser.getAddress());
+		//saveOcupations(clientUser.getOcupations());
 		clientUserRepository.save(clientUser);
 	}
 	

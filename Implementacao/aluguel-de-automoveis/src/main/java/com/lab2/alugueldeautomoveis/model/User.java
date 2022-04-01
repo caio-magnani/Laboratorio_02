@@ -17,16 +17,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Min(3)
+//    @NotNull
+ //   @Min(3)
     private String name;
 
-    @NotNull
-    @Min(5)
+//    @NotNull
+//    @Min(5)
     private String email;
 
-    @NotNull
-    @Min(8)
+ ///   @NotNull
+ //   @Min(8)
     private String password;
 
     public User(String name,String email, String password){

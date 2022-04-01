@@ -23,12 +23,12 @@ public class ClientUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Min(14)
+ //   @NotNull
+ //   @Min(14)
     private String cpf;
 
-    @NotNull
-    @Min(10)
+ //   @NotNull
+ //   @Min(10)
     private String rg;
     
     @OneToOne
