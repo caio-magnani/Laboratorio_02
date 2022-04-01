@@ -43,7 +43,7 @@ public class ClientUser {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    public ClientUser(String name, String email, String password, String cpf, String rgString){
+    public ClientUser(String name, String email, String password, String cpf, String rg){
         user = new User(name, email, password);
         setCpf(cpf);
         setRg(rg);     
