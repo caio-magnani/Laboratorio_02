@@ -14,6 +14,7 @@
     border-color: black;
 }
 
-.form-signin{
-    width: 400px;
+main.login{
+    max-width: 600px;
+    min-width: 300px;
 }

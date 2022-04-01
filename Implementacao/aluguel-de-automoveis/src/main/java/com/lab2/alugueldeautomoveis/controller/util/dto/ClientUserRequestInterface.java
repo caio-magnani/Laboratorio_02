@@ -1,11 +1,6 @@
 package com.lab2.alugueldeautomoveis.controller.util.dto;
 
-import java.util.List;
-
-import com.lab2.alugueldeautomoveis.model.Address;
 import com.lab2.alugueldeautomoveis.model.ClientUser;
-import com.lab2.alugueldeautomoveis.model.Ocupation;
-import com.lab2.alugueldeautomoveis.model.User;
 
 class ClientUserRequestInterface {
 	
@@ -14,8 +9,6 @@ class ClientUserRequestInterface {
 	private String password;
 	private String rg;
 	private String cpf;
-	private List<Ocupation> ocupations;
-	private Address address;
 	
 	
 
@@ -31,10 +24,6 @@ class ClientUserRequestInterface {
 		return password;
 	}
 
-	public List<Ocupation> getOcupations() {
-		return ocupations;
-	}
-
 	public String getCpf() {
     	return this.cpf;
     }
@@ -42,14 +31,6 @@ class ClientUserRequestInterface {
     public String getRg() {
     	return this.rg;
     }
-
- //   public List<Ocupation> getOcupations(){
-//    	return this.ocupations;
- //   }
-
-//    public Address getAddress() {
-//    	return this.address;
-//    }
     
     
 
@@ -60,8 +41,6 @@ class ClientUserRequestInterface {
 		this.password = password;
 		this.rg = rg;
 		this.cpf = cpf;
-		this.ocupations = ocupations;
-		this.address = address;
 	}
 
 	public ClientUser toClientUser() {

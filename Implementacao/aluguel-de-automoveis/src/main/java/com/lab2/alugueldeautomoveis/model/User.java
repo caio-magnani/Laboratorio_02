@@ -17,16 +17,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotNull
- //   @Min(3)
+    @NotNull
+    @Min(3)
     private String name;
 
-//    @NotNull
-//    @Min(5)
+    @NotNull
+    @Min(5)
     private String email;
 
- ///   @NotNull
- //   @Min(8)
+    @NotNull
+    @Min(8)
     private String password;
 
     public User(String name,String email, String password){
@@ -74,6 +74,10 @@ public class User {
 
     @AssertTrue
     public boolean login(String email, String password) {   	
-    	return (this.email == email && this.password == password);
+    	try{
+            return (this.email.equals(email) && this.password.equals(password));
+        }catch(Exception e){
+            return false;
+        }
     }
 }

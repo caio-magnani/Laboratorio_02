@@ -2,23 +2,24 @@ package com.lab2.alugueldeautomoveis.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.lab2.alugueldeautomoveis.model.ClientUser;
-import com.lab2.alugueldeautomoveis.model.Ocupation;
+// import com.lab2.alugueldeautomoveis.model.Ocupation;
 import com.lab2.alugueldeautomoveis.controller.util.dto.LoginUserRequest;
-import com.lab2.alugueldeautomoveis.model.Address;
+// import com.lab2.alugueldeautomoveis.model.Address;
 import com.lab2.alugueldeautomoveis.model.User;
-import com.lab2.alugueldeautomoveis.repository.AddressRepository;
+// import com.lab2.alugueldeautomoveis.repository.AddressRepository;
 import com.lab2.alugueldeautomoveis.repository.ClientUserRepository;
-import com.lab2.alugueldeautomoveis.repository.OcupationRepository;
+// import com.lab2.alugueldeautomoveis.repository.OcupationRepository;
 import com.lab2.alugueldeautomoveis.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+ import org.springframework.web.bind.annotation.GetMapping;
+ import org.springframework.web.bind.annotation.PostMapping;
+ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
@@ -31,11 +32,11 @@ public class ClientUserController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private AddressRepository addressRepository;
+	//@Autowired
+	//private AddressRepository addressRepository;
 
-	@Autowired
-	private OcupationRepository ocupationRepository;
+	//@Autowired
+	//private OcupationRepository ocupationRepository;
 
 	@GetMapping(value = "/login")
 	public String loginPage(LoginUserRequest userRequest){
@@ -43,7 +44,7 @@ public class ClientUserController {
 	}
 	
 	@PostMapping(value = "/login")
-	public String login(LoginUserRequest request, BindingResult result){
+	public String login(@Valid LoginUserRequest request, BindingResult result){
 		System.out.println("ENTROU AQUI CARALHO! "+request.getEmail()+"  "+request.getPassword());
 		User user = new User();
 		try{
@@ -58,7 +59,7 @@ public class ClientUserController {
 			return "client/login";
 		if(!user.login(request.getEmail(), request.getPassword())){
 			request.setExist(false);
-			return "client/login";
+			return "client/cadastro";
 		}
 		return "client/home";
 	}
@@ -70,7 +71,7 @@ public class ClientUserController {
 	
 	@PostMapping(value = "/cadastro")
 	public String insert(ClientUser client) {
-		saveClientUser(client);
+		saveClientUserCadastro(client);
 		return "client/login";
 	}
 	public List<ClientUser> getAll() {
@@ -89,7 +90,7 @@ public class ClientUserController {
 		userRepository.save(user);
 	}
 
-	private void saveOcupations(List<Ocupation> ocupations){
+	/*private void saveOcupations(List<Ocupation> ocupations){
 		for (Ocupation ocupation : ocupations) {
 			ocupationRepository.save(ocupation);
 		}
@@ -97,9 +98,9 @@ public class ClientUserController {
 
 	private void saveAddress(Address address){
 		addressRepository.save(address);
-	}
+	//}*/
 
-	private void saveClientUser(ClientUser clientUser){
+	private void saveClientUserCadastro(ClientUser clientUser){
 		saveUser(clientUser.getUser());
 		//saveAddress(clientUser.getAddress());
 		//saveOcupations(clientUser.getOcupations());

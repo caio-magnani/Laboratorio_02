@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{head :: head('index','Login')}"></head>
-<body class="d-flex flex-column">
+<body class="d-flex flex-column bg-light">
     <header th:replace="~{header :: login}" ></header>
-    <main class="d-flex flex-column align-items-center text-center bg-light">
+    <main class="container text-center mt-5 login">
         <form th:object="${loginUserRequest}" action="/client/login" method="post">
-            <label th: for="email">Email:</label>
-            <input th:field="*{email}" type="email" placeholder="email@exemplo.com">
-            <input th:field="*{password}" type="password" placeholder="digite sua senha">
-            <input type="submit" value="Login">
+            <div>
+                <label for="email">Email:</label><br>
+                <input th:field="*{email}" th:errorclass="is-invalid" class="form-control" type="email" placeholder="email@exemplo.com"><br><p th:errors="*{email}" th:errorclass="invalid-feedback"></p><br>
+            </div>
+            <div>
+                <label for="password">Password:</label><br>
+                <input th:field="*{password}" th:errorclass="is-invalid" class="form-control" type="password" placeholder="digite sua senha"><br>
+                <p th:errors="*{password}" class="invalid-feedback"></p>
+            </div>
+            <input class="btn btn-primary my-2" type="submit" value="Login"><br>
+            <a class="link link-primary my-2" th:href="@{/client/cadastro}">Não tem conta? Crie sua conta aqui!</a>
         </form>
-        <a class="btn btn-primary my-2" th:href="@{/client/cadastro}">Não tem conta? Crie sua conta aqui!</a>
+        
     </main>
     <th:block th:replace="~{footer :: footer}"></th:block>
 </body>
