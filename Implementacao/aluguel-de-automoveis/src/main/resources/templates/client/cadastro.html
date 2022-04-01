@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Cadastro</title>
-</head>
-<body>
-    <h1 class="success">Você está Cadastrando</h1>
+<head th:replace="~{head :: head('index','Login')}"></head>
+<body class="d-flex flex-column">
+<header th:replace="~{header :: login}" ></header>
+<article class="main-content">
+  <div class="form-group">
+    <form th:object="${clientUser}" method="post" action="/client/cadastro">
+   	 <h2>Registrar</h2>
+   	 <div class="input-box">
+   	 	<i class="fa fa-user" aria-hidden="true"></i>
+   	 	<input type ="name" name="name" placeholder="name" required>
+   	 </div>
+   	 
+   	 <div class="input-box">
+   	 	<i class="fa fa-user" aria-hidden="true"></i>
+   	 	<input type ="text" name="email" placeholder="email" required>
+   	 </div>
+   	 
+   	 <div class="input-box">
+   	 	<i class="fa fa-user" aria-hidden="true"></i>
+   	 	<input type ="text" name="password" placeholder="password" required>
+   	 </div>
+   	 
+   	 <div class="input-box">
+   	 	<i class="fa fa-user" aria-hidden="true"></i>
+   	 	<input type ="text" name="rg" placeholder="rg" required>
+   	 </div>
+   	 
+   	 <div class="input-box">
+   	 	<i class="fa fa-user" aria-hidden="true"></i>
+   	 	<input type ="text" name="cpf" placeholder="cpf" required>
+   	 </div>
+   	 
+   	 <div class="input-box">
+   	 	<input type="submit" name="cadastro" value="Register"
+   	 </div>
+   	 
+   	 
+  </div>
+
+</article>
+</main>
+ 	<th:block th:replace="~{footer :: footer}"></th:block>   
 </body>
 </html>
